@@ -1,0 +1,697 @@
+1.Write a program that takes a command-line argument n and prints a table of the
+  powers of 2 that are less than or equal to 2^n.
+
+Answer-
+#!/bin/bash
+echo "Enter a base number:"
+read base
+echo  "Enter a exponential number:"
+read exp
+power=1
+for (( counter=$exp; counter!=0; counter-- ))
+do
+    power=$(($power*$base))
+
+done
+echo $power
+--------------------------------------------------------------------------------------------
+Output
+
+91940@LAPTOP-BEPC3SST MINGW64 ~/Desktop/TFP-630/Assignments/Day6
+$ bash power_of_2.sh
+Enter a base number:
+5
+Enter a exponential number:
+5
+3125
+---------------------------------------------------------------------------------------------
+
+2. Write a program that takes a command-line argument n and prints the nth harmonic
+   number.
+
+Answer-
+#!/bin/bash -x
+read -p "enter a number: " n
+harmonic=0
+for (( i=1; i<=n; i++))
+do
+harmonic=`echo "scale=2;$harmonic+(1/$i)" | bc`
+done
+-------------------------------------------------------------------------------------------
+
+3.Write a program that takes a input and determines if the number is a prime.
+Answer-
+
+#!/bin/bash
+echo "Enter a number"
+read number
+result=1
+
+for ((  counter=2; counter<$number; counter++ ))
+do
+    if  [  $(($number%$counter))  -eq 0 ]
+    then
+        result=$(($result+1))
+    fi
+done
+if [  $result -eq 1 ]
+then
+  echo "its a prime number"
+else
+  echo "its not a prime number"
+fi
+---------------------------------------------------------------------------------------
+Output
+
+91940@LAPTOP-BEPC3SST MINGW64 ~/Desktop/TFP-630/Assignments/Day6
+$ bash prime_number.sh
+Enter a number
+2
+its a prime number
+
+91940@LAPTOP-BEPC3SST MINGW64 ~/Desktop/TFP-630/Assignments/Day6
+$ bash prime_number.sh
+Enter a number
+10
+its not a prime number
+----------------------------------------------------------------------------------------
+
+4.Extend the program to take a range of number as input and output the Prime
+  Numbers in that range.
+Answer-
+
+#!/bin/bash
+echo  "Enter a first number:"
+read number1
+echo  "Enter a second number:"
+read number2
+
+for (( counter1=number1;  counter1<number2; counter1++ ))
+do
+    result=1
+   for (( counter2=2; counter2<counter1; counter2++ ))
+   do
+     if [ $(($counter1%$counter2))  -eq 0 ]
+     then
+         result=$(($result+1))
+     fi
+    done
+
+     if [ $result -eq 1 ]
+        then
+        echo "Prime numbers between range is :$counter1"
+     fi
+done
+----------------------------------------------------------------------------------------
+
+Output
+
+91940@LAPTOP-BEPC3SST MINGW64 ~/Desktop/TFP-630/Assignments/Day6
+$ bash input_output_prime_number.sh
+Enter a first number:
+20
+Enter a second number:
+32
+Prime numbers between range is :23
+Prime numbers between range is :29
+Prime numbers between range is :31
+
+91940@LAPTOP-BEPC3SST MINGW64 ~/Desktop/TFP-630/Assignments/Day6
+$ bash input_output_prime_number.sh
+Enter a first number:
+30
+Enter a second number:
+50
+Prime numbers between range is :31
+Prime numbers between range is :37
+Prime numbers between range is :41
+Prime numbers between range is :43
+Prime numbers between range is :47
+
+----------------------------------------------------------------------------------------
+
+5.Write a program that computes a factorial of a number taken as input.5
+  Factorial – 5! = 1 * 2 * 3 * 4 * 5
+Answer-
+
+#!/bin/bash
+echo "Enter a number:"
+read number1
+result=1
+
+for (( number=1; number<=$number1; number++ ))
+do
+
+    result=$(( $result*$number ))
+done
+
+echo " factorial of a  number is:$result"
+------------------------------------------------------------------------------------------
+
+Output
+
+91940@LAPTOP-BEPC3SST MINGW64 ~/Desktop/TFP-630/Assignments/Day6
+$ bash factorial_number.sh
+Enter a number
+50
+ factorial of a number is:-3258495067890909184
+
+91940@LAPTOP-BEPC3SST MINGW64 ~/Desktop/TFP-630/Assignments/Day6
+$ bash factorial_number.sh
+Enter a number
+20
+ factorial of a number is:2432902008176640000
+-------------------------------------------------------------------------------------------
+
+6.Write a program to compute Factors of a number N using prime factorization method.
+  Logic -> Traverse till i*i <= N instead of i <= N for efficiency.
+  O/P -> Print the prime factors of number N.
+
+Answer-
+
+#!/bin/bash
+echo "Enter a Number:"
+read number
+
+for (( counter=2;  counter<$number;  counter++ ))
+do
+
+   while [  $(($number%$counter)) -eq 0 ]
+   do
+
+      echo "$counter "
+      number=$(($number/$counter))
+      done
+done
+
+if [  $number -gt 2 ]
+then
+      echo "$number"
+fi
+------------------------------------------------------------------------------------------
+
+Output
+
+91940@LAPTOP-BEPC3SST MINGW64 ~/Desktop/TFP-630/Assignments/Day6
+$ bash prime_factorizatio.sh
+Enter a number:
+30
+2
+3
+5
+
+91940@LAPTOP-BEPC3SST MINGW64 ~/Desktop/TFP-630/Assignments/Day6
+$ bash prime_factorizatio.sh
+Enter a number:
+36
+2
+2
+3
+3
+-----------------------------------------------------------------------------------------------
+1.Write a program that takes a command-line argument n and prints a
+  table of the powers of 2 that are less than or equal to 2^n till 256 is
+  reached..
+
+Answer-
+#!/bin/bash
+echo "Enter a Number:"
+read number
+
+exp=2
+result=1
+while [  $result -le 256 ]
+do
+    echo  "power table of the $number is:$result"
+
+    result=$(($result*$exp))
+
+done
+-------------------------------------------------------------------------------------
+
+Output
+
+91940@LAPTOP-BEPC3SST MINGW64 ~/Desktop/TFP-630/Assignments/Day6 (master)
+$ bash 2^n_256.sh
+Enter a number:
+2
+power table of the 2 is:1
+power table of the 2 is:2
+power table of the 2 is:4
+power table of the 2 is:8
+power table of the 2 is:16
+power table of the 2 is:32
+power table of the 2 is:64
+power table of the 2 is:128
+power table of the 2 is:256
+
+91940@LAPTOP-BEPC3SST MINGW64 ~/Desktop/TFP-630/Assignments/Day6 (master)
+$ bash 2^n_256.sh
+Enter a number:
+3
+power table of the 3 is:1
+power table of the 3 is:2
+power table of the 3 is:4
+power table of the 3 is:8
+power table of the 3 is:16
+power table of the 3 is:32
+power table of the 3 is:64
+power table of the 3 is:128
+power table of the 3 is:256
+
+91940@LAPTOP-BEPC3SST MINGW64 ~/Desktop/TFP-630/Assignments/Day6 (master)
+$ bash 2^n_256.sh
+Enter a number:
+4
+power table of the 4 is:1
+power table of the 4 is:2
+power table of the 4 is:4
+power table of the 4 is:8
+power table of the 4 is:16
+power table of the 4 is:32
+power table of the 4 is:64
+power table of the 4 is:128
+power table of the 4 is:256
+---------------------------------------------------------------------------------------
+
+2. Find the Magic Number
+   a. Ask the user to think of a number n between 1 to 100
+   b. Then check with the user if the number is less then n/2 or greater
+   c. Repeat till the Magic Number is reached..
+
+Answer-
+echo “Enter the limit:”
+read n
+echo “Enter the numbers”
+for(( i=0 ;i<n; i++ ))
+do
+read m
+a[i]=$m
+done
+for(( i=1; i<n; i++ ))
+do
+for(( j=0; j<n-i; j++))
+do
+if [ ${a[$j]} -gt ${a[$j+1]} ]
+then
+t=${a[$j]}
+a[$j]=${a[$j+1]}
+a[$j+1]=$t
+fi
+done
+done
+echo “Sorted array is”
+for(( i=0; i<n; i++ ))
+do
+echo “${a[$i]}”
+done
+echo “Enter the element to be searched :”
+read s
+l=0
+c=0
+u=$(($n-1))
+while [ $l -le $u ]
+do
+mid=$(((( $l+$u ))/2 ))
+if [ $s -eq ${a[$mid]} ]
+then
+c=1
+break
+elif [ $s -lt ${a[$mid]} ]
+then
+u=$(($mid-1))
+else
+l=$(($mid+1))
+fi
+done
+
+if [ $c -eq 1 ]
+
+then
+
+echo “Element found at position $(($mid+1))”
+
+else
+
+echo “Element not found”
+
+fi
+---------------------------------------------------------------------------------
+Output
+
+91940@LAPTOP-BEPC3SST MINGW64 ~/Desktop/TFP-630/Assignments/Day6 (master)
+$ bash magic_number.sh
+“Enter the limit:”
+2
+“Enter the numbers”
+30
+30
+“Sorted array is”
+“30”
+“30”
+“Enter the element to be searched :”
+25
+“Element not found”
+
+91940@LAPTOP-BEPC3SST MINGW64 ~/Desktop/TFP-630/Assignments/Day6 (master)
+$ bash magic_number.sh
+“Enter the limit:”
+3
+“Enter the numbers”
+45
+15
+30
+“Sorted array is”
+“15”
+“30”
+“45”
+“Enter the element to be searched :”
+15
+“Element found at position 1”
+
+---------------------------------------------------------------------------------
+
+3.Extend the Flip Coin problem till either Heads or Tails wins 11 times.
+Answer-
+
+
+#!/bin/bash
+number=1
+while [ $number -le 11 ]
+do
+    echo  "Head"
+    ((number++))
+
+done
+----------------------------------------------------------------------------------------
+Output
+
+91940@LAPTOP-BEPC3SST MINGW64 ~/Desktop/TFP-630/Assignments/Day6 (master)
+$ bash flip_coin.sh
+Head
+Head
+Head
+Head
+Head
+Head
+Head
+Head
+Head
+Head
+Head
+
+91940@LAPTOP-BEPC3SST MINGW64 ~/Desktop/TFP-630/Assignments/Day6 (master)
+$ notepad flip_coin.sh
+
+91940@LAPTOP-BEPC3SST MINGW64 ~/Desktop/TFP-630/Assignments/Day6 (master)
+$ bash flip_coin.sh
+Tails
+Tails
+Tails
+Tails
+Tails
+Tails
+Tails
+Tails
+Tails
+Tails
+Tails
+---------------------------------------------------------------------------------------------
+
+4. Write a Program where a gambler starts with Rs 100 and places Re 1 bet
+   until he/she goes broke i.e. no more money to gamble or reaches the
+   goal of Rs 200. Keeps track of number of times won and number of bets
+   made.
+Answer-
+
+#!/bin/bash
+won=1
+numberOfbets=0
+numberOfwins=0
+numberOflosses=0
+money_have=100
+money_should_earn=200
+each_bet=20
+money_for_winner=20
+
+while [[  $money_have -ge $each_bet &&  $money_have -lt  $money_should_earn ]]
+do
+  ((numberOfbets++))
+   result=$((RANDOM%2))
+   if  [ $result -eq $won ]
+   then
+        money_have=$(($money_have+$each_bet))
+        ((numberOfwins++))
+   else
+       money_have=$(($money_have-$each_bet))
+       ((numberOflosses--))
+   fi
+    if [ $money_have -eq 0 ]
+     then
+         echo "player broke"
+    else
+          echo "player won"
+    fi
+--------------------------------------------------------------------------------------------------
+
+1. Help user find degF or degC based on their Conversion Selection. Use
+   Case Statement and ensure that the inputs are within the Freezing Point (
+   0 °C / 32 °F ) and the Boiling Point of Water ( 100 °C / 212 °F )
+   a. degF = (degC * 9/5) + 32
+   b. degC = (degF – 32) * 5/9
+
+Answer-
+
+#!/bin/bash -x
+function degF_to_degC(){
+if [[ ($1 -ge 32 && $1 -le 212) ]]
+then
+degC=`echo "scale=2;($1-32.0)*5/9" | bc`
+else
+echo "temperature entered is beyond the limits!"
+fi
+}
+function degC_to_degF(){
+if [[ ($1 -ge 0 && $1 -le 100) ]]
+then
+degF=`echo "scale=2;($1*9.0/5)+32" | bc`
+else
+echo "temperature entered is beyond the limits!"
+fi
+}
+read -p "Enter the temperature: " T
+read -p "Select the option: 1) degF to degC 2) degC to degF " option
+degF_to_degC=1
+degC_to_degF=2
+case "$option" in
+$degF_to_degC)
+degF_to_degC $T
+;;
+$degC_to_degF)
+degC_to_degF $T
+;;
+*)
+echo "invalid option!"
+esac
+-----------------------------------------------------------------------------------
+
+Output
+
+91940@LAPTOP-BEPC3SST MINGW64 ~/Desktop/TFP-630/Assignments/Day6 (master)
+$ bash conversion_selection.sh
+Enter the temperature: 20
+select the option: 1) degF to degC 2) degC to degF 1
+temperature entered is beyond the limits!
+
+--------------------------------------------------------------------------------------------
+
+2. Write a function to check if the two numbers are Palindromes
+Answer-
+#!/bin/bash
+
+echo "Enter a first number:"
+read number1
+
+echo "Enter a second number:"
+read number2
+
+sum=0
+reminder=0
+
+function palindrome()
+{
+while [ $number1 -gt 0 ]
+do
+    reminder=$(($number1%10))
+    sum=$((($sum*10)+$reminder))
+    number1=$(($number1/10))
+done
+   if [ $number2 -eq $sum ]
+   then
+     echo "Palindrome"
+   else
+    echo "NOO"
+   fi
+}
+palindrome
+----------------------------------------------------------------------------------------
+
+Output
+
+91940@LAPTOP-BEPC3SST MINGW64 ~/Desktop/TFP-630/Assignments/Day6 (master)
+$ bash palindrome.sh
+Enter a first number:
+45
+Enter a second number:
+24
+NO
+
+91940@LAPTOP-BEPC3SST MINGW64 ~/Desktop/TFP-630/Assignments/Day6 (master)
+$ bash palindrome.sh
+Enter a first number:
+25
+Enter a second number:
+52
+palindrome
+-----------------------------------------------------------------------------------------
+
+3. Take a number from user and check if the number is a Prime then show
+   that its palindrome is also prime
+   a. Write function check if number is Prime
+
+#!/bin/bash
+result=1
+function prime()
+{
+number=$(($1))
+for ((  counter=2; counter<$number; counter++ ))
+do
+   if [  $(($number%$counter))  -eq 0 ]
+   then
+      result=$(($result+1))
+   fi
+done
+
+if [ $result -eq 1 ]
+then
+   echo "prime"
+else
+   echo "noo"
+fi
+}
+pal 10
+-------------------------------------------------------------------------------
+
+Output
+
+91940@LAPTOP-BEPC3SST MINGW64 ~/Desktop/TFP-630/Assignments/Day6 (master)
+$ bash prime_number.sh
+Enter a number
+6
+its not a prime number
+
+91940@LAPTOP-BEPC3SST MINGW64 ~/Desktop/TFP-630/Assignments/Day6 (master)
+$ bash prime_number.sh
+Enter a number
+5
+its a prime number
+------------------------------------------------------------------------------------
+
+b. Write function to get the Palindrome.
+Answer-
+
+#!/bin/bash
+sum=0
+reminder=0
+
+function palindrome()
+{
+    number=$(($1))
+    temp=$number
+    while  [ $number -gt 0 ]
+    do
+       reminder=$(($number%10))
+       sum=$((($sum*10)+$reminder))
+       number=$(($number/10))
+    done
+    if [  $temp  -eq $sum  ]
+     then
+       echo "Palindrome"
+     else
+      echo "Noo"
+    fi
+
+}
+palindrome 12
+----------------------------------------------------------------------------------
+Output
+
+91940@LAPTOP-BEPC3SST MINGW64 ~/Desktop/TFP-630/Assignments/Day6 (master)
+$ bash to_get_palindrome.sh
+Noo
+--------------------------------------------------------------------------------
+
+c. Check if the Palindrome number is also prime
+Answer-
+#!/bin/bash
+echo "Enter a number:"
+read number
+
+sum=0
+reminder=0
+temp=$number
+result=1
+
+while [ $number -gt 0 ]
+do
+   reminder=$(($number%10))
+   sum=$((($sum*10)+$reminder))
+   number=$(($number/10))
+done
+
+if [ $temp -eq $sum ]
+then
+    echo "Integer Palindrome"
+else
+  echo "Not a palindrome"
+fi
+
+for(( counter=2; counter<$temp; counter++ ))
+do
+    if [ $(($temp%$counter))  -eq 0 ]
+    then
+    result=$(($result+1))
+    fi
+done
+
+if [ $result -eq 1 ]
+then
+   echo "and prime number"
+else
+   echo "but Not a  prime number "
+fi
+-----------------------------------------------------------------------------------------
+
+Output
+
+91940@LAPTOP-BEPC3SST MINGW64 ~/Desktop/TFP-630/Assignments/Day6 (master)
+$ bash palindrom_is_prime.sh
+Enter a number:
+6
+Integer Palindrome
+but Not a  prime number
+
+91940@LAPTOP-BEPC3SST MINGW64 ~/Desktop/TFP-630/Assignments/Day6 (master)
+$ bash palindrom_is_prime.sh
+Enter a number:
+7
+Integer Palindrome
+and prime number
+
+91940@LAPTOP-BEPC3SST MINGW64 ~/Desktop/TFP-630/Assignments/Day6 (master)
+$ bash palindrom_is_prime.sh
+Enter a number:
+15
+Not a palindrome
+Not a  prime number
+-----------------------------------------------------------------------------------------
